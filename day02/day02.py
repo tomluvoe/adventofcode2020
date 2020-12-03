@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import itertools
+import re
 
 input_file = "input"
 data = ""
@@ -9,10 +9,8 @@ with open(input_file, 'r') as input_file:
     data = input_file.read()[:-1].split('\n')
 
 def _read_policy(data):
-    policy, pwd = data.split(': ')
-    range, char = policy.split(' ')
-    range = [int(r) for r in range.split('-')]
-    return pwd, char, range
+    r0, r1, char, pwd = re.search(r'(\d+)\-(\d+) (\w): (\w+)', data).groups()
+    return pwd, char, [int(r0), int(r1)]
 
 def part1(data):
     count = 0
