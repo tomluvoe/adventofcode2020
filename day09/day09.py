@@ -31,20 +31,16 @@ def contiguous_sum(preamble, number):
             break
     return c_sum
 
-def first_xmas_error(data, preamble_size=25, ret_list=False):
+def first_xmas_error(data, preamble_size=25):
     is_valid = True
     num = int(data[0])
-    ret_data = []
     for i in range(len(data)-preamble_size):
         preamble = data[i:preamble_size+i]
-        ret_data = data[0:preamble_size+i]
         input = data[preamble_size+i:]
         is_valid = is_sum(preamble, input[0])
         if not is_valid:
             num = int(input[0])
             break
-    if ret_list:
-        return ret_data
     return num
 
 def part1(data = False):
@@ -56,8 +52,7 @@ def part2(data = False):
     if not data:
         data = read_input('input')
     number = first_xmas_error(data)
-    data_list = first_xmas_error(data, ret_list=True)
-    return contiguous_sum(data_list, number)
+    return contiguous_sum(data, number)
 
 def unit_test_p1():
     data = read_input('test_input')
